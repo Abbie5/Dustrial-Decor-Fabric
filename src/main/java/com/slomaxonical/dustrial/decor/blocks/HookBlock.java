@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class HookBlock extends Block implements Waterloggable {
 
@@ -54,7 +54,7 @@ public class HookBlock extends Block implements Waterloggable {
     @Override
     public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facing, BlockState facingState, WorldAccess worldIn, BlockPos currentPos, BlockPos facingPos) {
         if (stateIn.get(WATERLOGGED)) {
-            worldIn.createAndScheduleFluidTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+            worldIn.scheduleFluidTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
         }
         return canPlaceAt(stateIn, worldIn, currentPos) ? stateIn : Blocks.AIR.getDefaultState();
 

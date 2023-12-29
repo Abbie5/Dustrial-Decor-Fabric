@@ -2,7 +2,7 @@ package com.slomaxonical.dustrial.decor.configs;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.minecraft.util.Identifier;

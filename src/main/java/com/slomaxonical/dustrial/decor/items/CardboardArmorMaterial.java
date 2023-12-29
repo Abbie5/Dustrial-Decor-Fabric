@@ -3,6 +3,7 @@ package com.slomaxonical.dustrial.decor.items;
 import com.slomaxonical.dustrial.decor.registry.DustrialItems;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
@@ -16,12 +17,12 @@ public class CardboardArmorMaterial implements ArmorMaterial {
     private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};
    
     @Override
-    public int getDurability(EquipmentSlot slotIn) {
-        return MAX_DAMAGE_ARRAY[slotIn.getEntitySlotId()] * 10;
+    public int getDurability(ArmorItem.Type type) {
+        return MAX_DAMAGE_ARRAY[type.ordinal()] * 10;
     }
 
     @Override
-    public int getProtectionAmount(EquipmentSlot slot) {
+    public int getProtection(ArmorItem.Type type) {
         return 2;
     }
 

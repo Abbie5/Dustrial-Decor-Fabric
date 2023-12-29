@@ -17,7 +17,7 @@ public class DirectionalBlock extends Block {
     }
 
     public BlockState getStateForPlacement(ItemPlacementContext context) {
-        return this.getDefaultState().with(FACING, context.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(FACING, context.getHorizontalPlayerFacing().getOpposite());
     }
 
     @Override

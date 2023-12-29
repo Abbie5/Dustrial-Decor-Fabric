@@ -1,7 +1,7 @@
 package com.slomaxonical.dustrial.decor.blocks;
 
 import com.slomaxonical.dustrial.decor.configs.DustrialConfigs;
-import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -14,11 +14,11 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
@@ -45,11 +45,12 @@ public class VerticalSlabBlock extends Block implements Waterloggable {
         super(settings);
         this.setDefaultState(this.getStateManager().getDefaultState().with(TYPE, VerticalSlabType.NORTH).with(WATERLOGGED, false));
     }
-    @Override
-    public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
-        if(AutoConfig.getConfigHolder(DustrialConfigs.class).getConfig().enableVerticalSlabs)
-            super.appendStacks(group, stacks);
-    }
+    // todo ??
+//    @Override
+//    public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
+//        if(AutoConfig.getConfigHolder(DustrialConfigs.class).getConfig().enableVerticalSlabs)
+//            super.appendStacks(group, stacks);
+//    }
     @Override
     public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
             super.appendTooltip(stack, world, tooltip, options);
@@ -132,7 +133,7 @@ public class VerticalSlabBlock extends Block implements Waterloggable {
     @Override
     public BlockState getStateForNeighborUpdate(@NotNull BlockState state, Direction facing, BlockState facingState, WorldAccess world, BlockPos currentPos, BlockPos facingPos) {
         if (state.get(WATERLOGGED)) {
-            world.createAndScheduleFluidTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.scheduleFluidTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
         return super.getStateForNeighborUpdate(state, facing,facingState,world,currentPos,facingPos);
     }

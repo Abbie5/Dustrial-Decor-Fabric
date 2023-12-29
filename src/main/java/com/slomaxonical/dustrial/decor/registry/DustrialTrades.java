@@ -1,7 +1,7 @@
 package com.slomaxonical.dustrial.decor.registry;
 
 import com.slomaxonical.dustrial.decor.configs.DustrialConfigs;
-import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;

@@ -1,7 +1,7 @@
 package com.slomaxonical.dustrial.decor.configs;
 
-import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
-import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
+import me.shedaniel.autoconfig.ConfigData;
+import me.shedaniel.autoconfig.annotation.Config;
 
 @Config(name = "dustrial_decor")
  public class DustrialConfigs implements ConfigData {

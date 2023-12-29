@@ -20,7 +20,7 @@ public class PaddedVerticalSlab extends VerticalSlabBlock {
         if (entityIn.bypassesLandingEffects()) {
             super.onLandedUpon(worldIn, state, pos, entityIn, fallDistance);
         } else {
-            entityIn.handleFallDamage(fallDistance, 0.0F, DamageSource.FALL);
+            entityIn.handleFallDamage(fallDistance, 0.0F, worldIn.getDamageSources().fall());
         }
 
     }

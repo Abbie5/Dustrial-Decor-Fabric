@@ -12,10 +12,10 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 public class DustrialDatagen implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator dataGenerator) {
-        dataGenerator.addProvider(DustrialRecipeProvider::new);
-        FabricTagProvider.BlockTagProvider blockTagProvider = new DustrialBlockTagProvider(dataGenerator);
-        dataGenerator.addProvider(blockTagProvider);
-        dataGenerator.addProvider(new DustrialItemTagProvider(dataGenerator,blockTagProvider));
-        dataGenerator.addProvider(DustrialBlockLootTableProvider::new);
+        FabricDataGenerator.Pack pack = dataGenerator.createPack();
+        pack.addProvider(DustrialRecipeProvider::new);
+        FabricTagProvider.BlockTagProvider blockTagProvider = pack.addProvider(DustrialBlockTagProvider::new);
+        pack.addProvider((output, registriesFuture) -> new DustrialItemTagProvider(output, registriesFuture, blockTagProvider));
+        pack.addProvider(DustrialBlockLootTableProvider::new);
     }
 }

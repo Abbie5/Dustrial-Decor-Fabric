@@ -2,16 +2,17 @@ package com.slomaxonical.dustrial.decor.data.provider;
 
 import com.slomaxonical.dustrial.decor.registry.DustrialBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.data.server.BlockLootTableGenerator;
+import net.minecraft.data.server.loottable.vanilla.VanillaBlockLootTableGenerator;
 
 public class DustrialBlockLootTableProvider extends FabricBlockLootTableProvider {
-    public DustrialBlockLootTableProvider(FabricDataGenerator dataGenerator) {
-        super(dataGenerator);
+    public DustrialBlockLootTableProvider(FabricDataOutput dataOutput) {
+        super(dataOutput);
     }
 
     @Override
-    protected void generateBlockLootTables() {
+    public void generate() {
         this.addDrop(DustrialBlocks.PADDED_BLOCK);
         this.addDrop(DustrialBlocks.MINI_PADDED_BLOCK);
         this.addDrop(DustrialBlocks.MINI_PADDED_STAIRS);
@@ -84,34 +85,34 @@ public class DustrialBlockLootTableProvider extends FabricBlockLootTableProvider
         this.addDrop(DustrialBlocks.RAINBOW_NEON_LIGHT);
         this.addDrop(DustrialBlocks.BLACK_LIGHT);
 
-        this.addDrop(DustrialBlocks.MINI_PADDED_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.MINI_PADDED_VERTICAL_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.BOLTED_INDUSTRIAL_IRON_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.BOLTED_INDUSTRIAL_IRON_VERTICAL_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.CAST_IRON_BRICKS_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.CAST_IRON_BRICKS_VERTICAL_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.SHEET_METAL_PLATING_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.SHEET_METAL_PLATING_VERTICAL_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.SHEET_METAL_TREADING_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.SHEET_METAL_TREADING_VERTICAL_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.RUSTY_SHEET_METAL_PLATING_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.RUSTY_SHEET_METAL_PLATING_VERTICAL_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.RUSTY_SHEET_METAL_TREADING_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.RUSTY_SHEET_METAL_TREADING_VERTICAL_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.CINDER_BRICKS_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.CINDER_BRICKS_VERTICAL_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.SMOOTH_CARDBOARD_SLAB, BlockLootTableGenerator::slabDrops);
-        this.addDrop(DustrialBlocks.SMOOTH_CARDBOARD_VERTICAL_SLAB, BlockLootTableGenerator::slabDrops);
+        this.addDrop(DustrialBlocks.MINI_PADDED_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.MINI_PADDED_VERTICAL_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.BOLTED_INDUSTRIAL_IRON_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.BOLTED_INDUSTRIAL_IRON_VERTICAL_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.CAST_IRON_BRICKS_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.CAST_IRON_BRICKS_VERTICAL_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.SHEET_METAL_PLATING_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.SHEET_METAL_PLATING_VERTICAL_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.SHEET_METAL_TREADING_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.SHEET_METAL_TREADING_VERTICAL_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.RUSTY_SHEET_METAL_PLATING_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.RUSTY_SHEET_METAL_PLATING_VERTICAL_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.RUSTY_SHEET_METAL_TREADING_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.RUSTY_SHEET_METAL_TREADING_VERTICAL_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.CINDER_BRICKS_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.CINDER_BRICKS_VERTICAL_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.SMOOTH_CARDBOARD_SLAB, this::slabDrops);
+        this.addDrop(DustrialBlocks.SMOOTH_CARDBOARD_VERTICAL_SLAB, this::slabDrops);
 
-        this.addDrop(DustrialBlocks.PADDED_DOOR, BlockLootTableGenerator::addDoorDrop);
-        this.addDrop(DustrialBlocks.ANCHOR, BlockLootTableGenerator::addDoorDrop);
-        this.addDrop(DustrialBlocks.CHAIN_DOOR, BlockLootTableGenerator::addDoorDrop);
-        this.addDrop(DustrialBlocks.INDUSTRIAL_IRON_DOOR, BlockLootTableGenerator::addDoorDrop);
-        this.addDrop(DustrialBlocks.SHEET_METAL_DOOR, BlockLootTableGenerator::addDoorDrop);
-        this.addDrop(DustrialBlocks.RUSTY_SHEET_METAL_DOOR, BlockLootTableGenerator::addDoorDrop);
-        this.addDrop(DustrialBlocks.CARDBOARD_DOOR, BlockLootTableGenerator::addDoorDrop);
-        this.addDrop(DustrialBlocks.RUSTY_IRON_DOOR, BlockLootTableGenerator::addDoorDrop);
-        this.addDrop(DustrialBlocks.IRON_BAR_DOOR, BlockLootTableGenerator::addDoorDrop);
+        this.addDrop(DustrialBlocks.PADDED_DOOR, this::doorDrops);
+        this.addDrop(DustrialBlocks.ANCHOR, this::doorDrops);
+        this.addDrop(DustrialBlocks.CHAIN_DOOR, this::doorDrops);
+        this.addDrop(DustrialBlocks.INDUSTRIAL_IRON_DOOR, this::doorDrops);
+        this.addDrop(DustrialBlocks.SHEET_METAL_DOOR, this::doorDrops);
+        this.addDrop(DustrialBlocks.RUSTY_SHEET_METAL_DOOR, this::doorDrops);
+        this.addDrop(DustrialBlocks.CARDBOARD_DOOR, this::doorDrops);
+        this.addDrop(DustrialBlocks.RUSTY_IRON_DOOR, this::doorDrops);
+        this.addDrop(DustrialBlocks.IRON_BAR_DOOR, this::doorDrops);
 
 //        this.addDropWithSilkTouch(DustrialBlocks.LARGE_ICE_CHAIN);
 //        this.addDropWithSilkTouch(DustrialBlocks.WRAPPED_ICE_CHAINS);

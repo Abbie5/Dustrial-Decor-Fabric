@@ -5,7 +5,7 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 
 public class CardboardArmor extends ArmorItem {
-    public CardboardArmor(ArmorMaterial materialIn, EquipmentSlot slot, Settings builder) {
-        super(materialIn, slot, builder);
+    public CardboardArmor(ArmorMaterial materialIn, ArmorItem.Type type, Settings builder) {
+        super(materialIn, type, builder);
     }
 }

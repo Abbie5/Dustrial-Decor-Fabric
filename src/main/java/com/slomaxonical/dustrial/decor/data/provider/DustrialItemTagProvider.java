@@ -3,32 +3,38 @@ package com.slomaxonical.dustrial.decor.data.provider;
 import com.slomaxonical.dustrial.decor.data.tags.DustrialTags;
 import com.slomaxonical.dustrial.decor.registry.DustrialBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.tag.ItemTags;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.CompletableFuture;
+
 public class DustrialItemTagProvider extends FabricTagProvider.ItemTagProvider {
-    public DustrialItemTagProvider(FabricDataGenerator dataGenerator, @Nullable BlockTagProvider blockTagProvider) {
-        super(dataGenerator, blockTagProvider);
+    public DustrialItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture, @Nullable FabricTagProvider.BlockTagProvider blockTagProvider) {
+        super(output, completableFuture, blockTagProvider);
     }
-    private FabricTagBuilder<Item> getOrCreateTagBuilder(Identifier id) {
-        TagKey<Item> tag = TagKey.of(Registry.ITEM_KEY, id);
+
+    private FabricTagBuilder getOrCreateTagBuilder(Identifier id) {
+        TagKey<Item> tag = TagKey.of(RegistryKeys.ITEM, id);
         return this.getOrCreateTagBuilder(tag);
     }
 
     private void copy(Identifier id) {
-        TagKey<Block> blockTag = TagKey.of(Registry.BLOCK_KEY, id);
-        TagKey<Item> itemTag = TagKey.of(Registry.ITEM_KEY, id);
+        TagKey<Block> blockTag = TagKey.of(RegistryKeys.BLOCK, id);
+        TagKey<Item> itemTag = TagKey.of(RegistryKeys.ITEM, id);
         this.copy(blockTag, itemTag);
     }
     @Override
-    protected void generateTags() {
+    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
 
         this.getOrCreateTagBuilder(ItemTags.DOORS)
                 .add(DustrialBlocks.CARDBOARD_DOOR.asItem())

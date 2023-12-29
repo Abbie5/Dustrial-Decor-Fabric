@@ -2,24 +2,30 @@ package com.slomaxonical.dustrial.decor.data.provider;
 
 import com.slomaxonical.dustrial.decor.registry.DustrialBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+
+import java.util.concurrent.CompletableFuture;
 
 public class DustrialBlockTagProvider extends FabricTagProvider.BlockTagProvider {
-    public DustrialBlockTagProvider(FabricDataGenerator dataGenerator) {
-        super(dataGenerator);
+    public DustrialBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        super(output, registriesFuture);
     }
-    private FabricTagBuilder<Block> getOrCreateTagBuildeer(Identifier id) {
-        TagKey<Block> tag = TagKey.of(Registry.BLOCK_KEY, id);
+
+    private FabricTagBuilder getOrCreateTagBuildeer(Identifier id) {
+        TagKey<Block> tag = TagKey.of(RegistryKeys.BLOCK, id);
         return this.getOrCreateTagBuilder(tag);
     }
 
     @Override
-    protected void generateTags() {
+    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         this.getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(DustrialBlocks.PADDED_TRAPDOOR)
                 .add(DustrialBlocks.PADDED_DOOR)
